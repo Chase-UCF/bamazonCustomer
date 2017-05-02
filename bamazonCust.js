@@ -10,6 +10,7 @@ var connection = mysql.createConnection({
 var amount;
 var userId;
 var price;
+var sql = "UPDATE products SET stock_quantity = ? WHERE item_id = ?";
 
 connection.connect();
 
@@ -51,13 +52,11 @@ var runSearch = function(answer) {
                     console.log("Insufficient quantity!");
                     connection.end();
                 }else{
-                    var sql = "UPDATE products SET stock_quantity = ? WHERE item_id = ?;"
-                    connection.query(sql, [amount, amountToUpdate]),function(err, res) { 
-                        if (err) throw err; 
-                        console.log(customerPurchase * price); 
-                        connection.end();
-                    };
+                    console.log("Your invoice amount will be $" + customerPurchase * price); 
+                    connection.query(sql, [amountToUpdate, userId]); 
+                        
                 }
+                connection.end();
             });
         };
     });
