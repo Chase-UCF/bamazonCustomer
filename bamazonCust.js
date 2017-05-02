@@ -50,7 +50,6 @@ var runSearch = function(answer) {
                 var amountToUpdate = amount - customerPurchase;
                 if (customerPurchase > amount) {
                     console.log("Insufficient quantity!");
-                    connection.end();
                 }else{
                     console.log("Your invoice amount will be $" + customerPurchase * price); 
                     connection.query(sql, [amountToUpdate, userId]); 
